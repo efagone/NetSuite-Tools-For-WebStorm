@@ -166,6 +166,23 @@ public class NSClient	{
             return _port.update(uploadFile);
         }
 
+        if (nsFileName.length() > 40) {
+            WriteResponse addResp = _port.add(uploadFile);
+
+            if (addResp.getStatus().isIsSuccess()) {
+                //tried only setting caption on file creation, but NS is not honoring it
+                //they still default to full filename as the caption
+                String newFileInternalId = ((RecordRef) addResp.getBaseRef()).getInternalId();
+                uploadFile = downloadFile(newFileInternalId);
+                uploadFile.setCaption(nsFileName.substring(0, 40));
+                uploadFile.setFileSize(null);
+                uploadFile.setUrl(null);
+                return _port.update(uploadFile);
+            }
+
+            return addResp;
+        }
+        
         return _port.add(uploadFile);
     }
 
