@@ -90,7 +90,7 @@ public class UploadTask implements Runnable {
                             displayUploadResultBalloonMessage(file.getName(), true);
                         }
                     } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(null, "Error uploading file", "ERROR", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Error uploading file: " + ex.toString(), "ERROR", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
