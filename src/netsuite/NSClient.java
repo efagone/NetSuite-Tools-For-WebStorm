@@ -161,6 +161,7 @@ public class NSClient	{
 
         uploadFile.setContent(loadFile(filePath));
         uploadFile.setFileSize(null);
+        uploadFile.setUrl(null);
 
         if (shouldUpdate) {
             return _port.update(uploadFile);
